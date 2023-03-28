@@ -1,7 +1,5 @@
 package com.vti.demo.chatbot.domain.response;
 
-import java.util.List;
-
 import lombok.Data;
 
 @Data

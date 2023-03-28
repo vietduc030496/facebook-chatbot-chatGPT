@@ -27,7 +27,7 @@ public class ChatController {
 	@PostMapping
 	public ResponseEntity<?> chat(@RequestBody UserRequest questions) {
 		String fooResourceUrl
-		  = "https://api.openai.com/v1/chat/completions";
+		  = "";
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -42,12 +42,12 @@ public class ChatController {
 	    
 		
 		HttpEntity<ChatRequest> entity = new HttpEntity<ChatRequest>(chatRequest,headers);
-		
+	
 //		ChatResponse exchange = restTemplate.exchange(fooResourceUrl, HttpMethod.POST, entity, ChatResponse.class).getBody();
 		String exchange = restTemplate.exchange(fooResourceUrl, HttpMethod.POST, entity, String.class).getBody();
 		
-		Gson g = new Gson();  
-		ChatResponse s = g.fromJson(exchange, ChatResponse.class) ;
+//		Gson g = new Gson();  
+//		ChatResponse s = g.fromJson(exchange, ChatResponse.class) ;
 		
 		return null;
 	}
