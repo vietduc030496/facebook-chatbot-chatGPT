@@ -14,13 +14,13 @@ import lombok.Data;
 public class EnviromentComponent {
 	
 	
-	@Value("${appSecret}")
+	@Value("${app_secret}")
 	private String appSecret;
 	
-	@Value("${verifyToken}")
+	@Value("${verify_token}")
 	private String verifyToken;
 	
-	@Value("${pageAccessToken}")
+	@Value("${page_access_token}")
 	private String pageAccessToken;
 	
 

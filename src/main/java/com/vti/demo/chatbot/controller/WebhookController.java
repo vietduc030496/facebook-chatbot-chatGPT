@@ -1,5 +1,8 @@
 package com.vti.demo.chatbot.controller;
 
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +25,8 @@ import com.github.messenger4j.send.NotificationType;
 import com.github.messenger4j.send.message.TextMessage;
 import com.github.messenger4j.send.recipient.IdRecipient;
 import com.github.messenger4j.webhook.event.TextMessageEvent;
-
-import static java.util.Optional.empty;
-import static java.util.Optional.of;
+import com.vti.demo.chatbot.domain.response.ChatResponse;
+import com.vti.demo.chatbot.service.GPTService;
 
 @CrossOrigin("*")
 @RestController
@@ -34,12 +36,9 @@ public class WebhookController {
 	@Autowired
 	private Messenger messenger;
 	
-	@GetMapping("/test")
-	public String test() {
-		
-		return "hello";
-	}
-
+	@Autowired
+	private GPTService gptService;
+	
 	@GetMapping
 	public ResponseEntity<?> verifyWebhook(@RequestParam("hub.mode") final String mode,
 			@RequestParam("hub.verify_token") final String verifyToken, @RequestParam("hub.challenge") final String challenge) {
@@ -73,8 +72,11 @@ public class WebhookController {
 	}
 
 	private void handleTextMessageEvent(TextMessageEvent event) throws MessengerApiException, MessengerIOException {
+		ChatResponse response = gptService.chat(event.text());
+		
 		final String senderId = event.senderId();
 		sendTextMessageUser(senderId, "Xin chào! Đây là chatbot được tạo từ ứng dụng Spring Boot");
+		sendTextMessageUser(senderId, response.getChoices().get(0).getMessage().getContent());
 
 	}
 
