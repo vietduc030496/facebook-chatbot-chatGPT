@@ -13,7 +13,6 @@ import lombok.Data;
 @Data
 public class EnviromentComponent {
 	
-	
 	@Value("${app_secret}")
 	private String appSecret;
 	

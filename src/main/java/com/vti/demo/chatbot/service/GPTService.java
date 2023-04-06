@@ -32,7 +32,7 @@ public class GPTService {
 		
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-	    headers.setBearerAuth(chatGPTComponent.getAccessToken());
+		headers.setBearerAuth(chatGPTComponent.getAccessToken());
 		
 	    ChatRequest request = new ChatRequest();
 	    request.setMessages(List.of(new MessageRequest(content)));

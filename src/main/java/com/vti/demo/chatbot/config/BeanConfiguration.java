@@ -37,11 +37,6 @@ public class BeanConfiguration {
 	
 	@Bean
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-//		UriTemplateHandler handler = new RootUriTemplateHandler(chatComponent.getBaseUrl());
-//		RestTemplate restTemplate = builder.uriTemplateHandler(handler).build();
-//		HttpUtils.addTemplate(restTemplate);
-//		return restTemplate;
-		
 		RestTemplate restTemplate = new RestTemplate();
 		HttpUtils.addTemplate(restTemplate);
 		return restTemplate;

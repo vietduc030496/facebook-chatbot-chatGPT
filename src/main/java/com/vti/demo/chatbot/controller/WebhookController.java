@@ -1,5 +1,9 @@
 package com.vti.demo.chatbot.controller;
 
+import static com.github.messenger4j.Messenger.CHALLENGE_REQUEST_PARAM_NAME;
+import static com.github.messenger4j.Messenger.MODE_REQUEST_PARAM_NAME;
+import static com.github.messenger4j.Messenger.SIGNATURE_HEADER_NAME;
+import static com.github.messenger4j.Messenger.VERIFY_TOKEN_REQUEST_PARAM_NAME;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
@@ -35,13 +39,14 @@ public class WebhookController {
 
 	@Autowired
 	private Messenger messenger;
-	
+
 	@Autowired
 	private GPTService gptService;
-	
+
 	@GetMapping
-	public ResponseEntity<?> verifyWebhook(@RequestParam("hub.mode") final String mode,
-			@RequestParam("hub.verify_token") final String verifyToken, @RequestParam("hub.challenge") final String challenge) {
+	public ResponseEntity<?> verifyWebhook(@RequestParam(MODE_REQUEST_PARAM_NAME) final String mode,
+			@RequestParam(VERIFY_TOKEN_REQUEST_PARAM_NAME) final String verifyToken,
+			@RequestParam(CHALLENGE_REQUEST_PARAM_NAME) final String challenge) {
 		try {
 			messenger.verifyWebhook(mode, verifyToken);
 			return ResponseEntity.ok(challenge);
@@ -53,7 +58,7 @@ public class WebhookController {
 
 	@PostMapping
 	public ResponseEntity<Void> handleCallback(@RequestBody final String payload,
-			@RequestHeader(Messenger.SIGNATURE_HEADER_NAME) final String signature) throws MessengerVerificationException {
+			@RequestHeader(SIGNATURE_HEADER_NAME) final String signature) throws MessengerVerificationException {
 		this.messenger.onReceiveEvents(payload, of(signature), event -> {
 			if (event.isTextMessageEvent()) {
 				try {
@@ -73,13 +78,17 @@ public class WebhookController {
 
 	private void handleTextMessageEvent(TextMessageEvent event) throws MessengerApiException, MessengerIOException {
 		ChatResponse response = gptService.chat(event.text());
-		
 		final String senderId = event.senderId();
-//		sendTextMessageUser(senderId, "Xin chào! Đây là chatbot được tạo từ ứng dụng Spring Boot");
 		sendTextMessageUser(senderId, response.getChoices().get(0).getMessage().getContent());
-
 	}
 
+	/**
+	 * 
+	 * Send text message to idSender
+	 * 
+	 * @param idSender
+	 * @param text
+	 */
 	private void sendTextMessageUser(String idSender, String text) {
 		try {
 			final IdRecipient recipient = IdRecipient.create(idSender);
@@ -94,5 +103,5 @@ public class WebhookController {
 			e.printStackTrace();
 		}
 	}
-	
+
 }
