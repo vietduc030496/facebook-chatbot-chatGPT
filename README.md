@@ -30,3 +30,14 @@
 - Thêm 2 thuộc tính như trong ảnh
 
 ![This is an image](/image/webhooks2.png)
+
+
+
+- Truy cập https://platform.openai.com/account/api-keys tạo access token cho giá trị access_token trong file env.yaml
+
+
+## Build
+
+```
+mvn clean install
+```
