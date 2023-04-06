@@ -53,7 +53,7 @@ public class WebhookController {
 
 	@PostMapping
 	public ResponseEntity<Void> handleCallback(@RequestBody final String payload,
-			@RequestHeader("signature") final String signature) throws MessengerVerificationException {
+			@RequestHeader(Messenger.SIGNATURE_HEADER_NAME) final String signature) throws MessengerVerificationException {
 		this.messenger.onReceiveEvents(payload, of(signature), event -> {
 			if (event.isTextMessageEvent()) {
 				try {
@@ -75,7 +75,7 @@ public class WebhookController {
 		ChatResponse response = gptService.chat(event.text());
 		
 		final String senderId = event.senderId();
-		sendTextMessageUser(senderId, "Xin chào! Đây là chatbot được tạo từ ứng dụng Spring Boot");
+//		sendTextMessageUser(senderId, "Xin chào! Đây là chatbot được tạo từ ứng dụng Spring Boot");
 		sendTextMessageUser(senderId, response.getChoices().get(0).getMessage().getContent());
 
 	}
