@@ -17,7 +17,7 @@ import com.vti.demo.chatbot.util.HttpUtils;
 
 @Service
 public class GPTService {
-	
+
 	@Autowired
 	private ChatGPTComponent chatGPTComponent;
 
@@ -29,14 +29,15 @@ public class GPTService {
 	 */
 	public ChatResponse chat(String content) {
 		String baseUrl = chatGPTComponent.getBaseUrl();
-		
+
 		HttpHeaders headers = new HttpHeaders();
-	    headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		headers.setBearerAuth(chatGPTComponent.getAccessToken());
-		
-	    ChatRequest request = new ChatRequest();
-	    request.setMessages(List.of(new MessageRequest(content)));
-	    
+
+		ChatRequest request = new ChatRequest();
+		request.setModel(chatGPTComponent.getModel());
+		request.setMessages(List.of(new MessageRequest(content)));
+
 		HttpEntity<ChatRequest> requestEntity = new HttpEntity<>(request, headers);
 		return HttpUtils.post(baseUrl, requestEntity, ChatResponse.class);
 	}

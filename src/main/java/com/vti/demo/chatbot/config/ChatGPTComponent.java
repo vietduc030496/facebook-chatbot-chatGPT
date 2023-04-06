@@ -9,13 +9,16 @@ import lombok.Data;
 
 @Data
 @Component
-@PropertySource(value = {"classpath:env.yaml"}, ignoreResourceNotFound = true)
+@PropertySource(value = { "classpath:env.yaml" }, ignoreResourceNotFound = true)
 @ConfigurationProperties(prefix = "chatgpt")
 public class ChatGPTComponent {
 
 	@Value("${base_url}")
 	private String baseUrl;
-	
+
 	@Value("${access_token}")
 	private String accessToken;
+
+	@Value("${model}")
+	private String model;
 }
