@@ -13,12 +13,26 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "chatgpt")
 public class ChatGPTComponent {
 
-	@Value("${base_url}")
-	private String baseUrl;
+	@Value("${chat.base_url}")
+	private String chatBaseUrl;
+
+	@Value("${image.base_url}")
+	private String imageBaseUrl;
 
 	@Value("${access_token}")
 	private String accessToken;
 
 	@Value("${model}")
 	private String model;
+
+	@Value("${mode}")
+	private String mode;
+
+	public String getBaseUrl() {
+		return switch (mode) {
+		case "chat" -> chatBaseUrl;
+		case "image" -> imageBaseUrl;
+		default -> chatBaseUrl;
+		};
+	}
 }
