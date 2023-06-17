@@ -1,5 +1,11 @@
 # facebook-chatbot-chatGPT
 
+## Prerequisites
+
+- Git
+- Java 17 or later
+- Maven
+
 ## Setting environment
 
 - Truy cập https://developers.facebook.com/ tạo ứng dụng nhắn tin
