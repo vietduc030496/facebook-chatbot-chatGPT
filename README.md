@@ -25,7 +25,7 @@
 
 
 
-- Trong phần Webhooks: điền URL gọi lại là url bên trên và /webhook
+- Trong phần Webhooks: điền URL gọi lại là url mà bạn đã deploy source và thêm /webhook. Ex: https://test.com/webhook
 - Mã xác minh và thuộc tính verify_token trong file env.yaml điền gì cũng được nhưng phải giống nhau
 
 ![This is an image](/image/webhooks1.png)
