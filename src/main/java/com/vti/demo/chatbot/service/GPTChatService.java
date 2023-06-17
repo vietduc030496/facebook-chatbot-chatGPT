@@ -16,7 +16,7 @@ import com.vti.demo.chatbot.domain.response.ChatResponse;
 import com.vti.demo.chatbot.util.HttpUtils;
 
 @Service
-public class GPTService {
+public class GPTChatService {
 
 	@Autowired
 	private ChatGPTComponent chatGPTComponent;

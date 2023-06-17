@@ -13,10 +13,10 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "chatgpt")
 public class ChatGPTComponent {
 
-	@Value("${chat.base_url}")
+	@Value("${chat_base_url}")
 	private String chatBaseUrl;
 
-	@Value("${image.base_url}")
+	@Value("${image_base_url}")
 	private String imageBaseUrl;
 
 	@Value("${access_token}")

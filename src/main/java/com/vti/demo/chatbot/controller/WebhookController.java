@@ -30,7 +30,7 @@ import com.github.messenger4j.send.message.TextMessage;
 import com.github.messenger4j.send.recipient.IdRecipient;
 import com.github.messenger4j.webhook.event.TextMessageEvent;
 import com.vti.demo.chatbot.domain.response.ChatResponse;
-import com.vti.demo.chatbot.service.GPTService;
+import com.vti.demo.chatbot.service.GPTChatService;
 
 @CrossOrigin("*")
 @RestController
@@ -41,7 +41,7 @@ public class WebhookController {
 	private Messenger messenger;
 
 	@Autowired
-	private GPTService gptService;
+	private GPTChatService gptService;
 
 	@GetMapping
 	public ResponseEntity<?> verifyWebhook(@RequestParam(MODE_REQUEST_PARAM_NAME) final String mode,
