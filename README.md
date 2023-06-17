@@ -11,7 +11,7 @@
 - Truy cập https://developers.facebook.com/ tạo ứng dụng nhắn tin
 
 - Vào menu Cài đặt -> Thông tin cơ bản
-- Khóa bí mật của ứng dụng là giá trị thuộc tính trong file env.yaml
+- Khóa bí mật của ứng dụng là giá trị thuộc tính app_secret trong file env.yaml
 - Miền ứng dụng là url sau khi deploy
 
 ![This is an image](/image/basic_info.png)
